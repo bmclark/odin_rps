@@ -19,4 +19,34 @@ function rand123 () {
     return (Math.floor((Math.random() +1 ) * 10000000) % 3);
 }
 
-alert(computerPlay());
+function playRound (computer, player) {
+    //compare computer/player selections and determine winner
+    let compWins = computer + " beats " + player + ", Computer wins.";
+    let playerWins = player + " beats " + computer + ", You win!";
+    // if equal call it a draw
+    if (computer === player) {
+        return computer + " equals " + player + ", it's a draw.";;
+    } else if (computer === 'rock' && player === 'scissors') {
+        return compWins;
+    } else if (computer === 'paper' && player === 'rock') {
+        return compWins;
+    } else if (computer === 'scissors' && player === 'paper') {
+        return compWins;
+    } else {
+        return playerWins;
+    }
+    // if comp = paper and player = rock comp wins
+    // if comp = scissors and player = paper comp wins
+    // else player wins
+}
+
+
+// get computer selection
+let computerSelection = computerPlay();
+
+// get player selection
+let playerSelection = prompt("Please choose rock, paper, or scissors: ");
+
+// play a round
+console.log(computerSelection, playerSelection)
+alert(playRound(computerSelection, playerSelection.toLowerCase()));
