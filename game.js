@@ -19,34 +19,61 @@ function rand123 () {
     return (Math.floor((Math.random() +1 ) * 10000000) % 3);
 }
 
-function playRound (computer, player) {
+function playRound () {
+    // get computer selection
+    let computer = computerPlay();
+
+    // get player selection
+    let player = prompt("Please choose rock, paper, or scissors: ");
+    player = player.toLowerCase();
+
     //compare computer/player selections and determine winner
     let compWins = computer + " beats " + player + ", Computer wins.";
     let playerWins = player + " beats " + computer + ", You win!";
-    // if equal call it a draw
+    
+    // determine outcome
     if (computer === player) {
-        return computer + " equals " + player + ", it's a draw.";;
+        alert(computer + " equals " + player + ", it's a draw.");
+        return 'draw';
     } else if (computer === 'rock' && player === 'scissors') {
-        return compWins;
+        alert(compWins);
+        return 'computer';
     } else if (computer === 'paper' && player === 'rock') {
-        return compWins;
+        alert(compWins);
+        return 'computer';
     } else if (computer === 'scissors' && player === 'paper') {
-        return compWins;
+        alert(compWins);
+        return 'computer';
     } else {
-        return playerWins;
+        alert(playerWins);
+        return 'player';
     }
-    // if comp = paper and player = rock comp wins
-    // if comp = scissors and player = paper comp wins
-    // else player wins
 }
 
+// play 5 rounds and determine winner
+function game () {
+    let compWins = 0;
+    let playerWins = 0;
+    
+    // call playRound function 5 times
+    for (let i = 0; i < 5; i++) {
+        let result = playRound();
 
-// get computer selection
-let computerSelection = computerPlay();
+        if (result === 'computer') {
+            compWins++;
+        } else if (result === 'player') {
+            playerWins++;
+        }
+        console.log(compWins, playerWins);
+    }
 
-// get player selection
-let playerSelection = prompt("Please choose rock, paper, or scissors: ");
+    if (compWins > playerWins) {
+        alert("Computer wins! " + compWins + " winning rounds vs your " + playerWins + " winning rounds.");
+    } else if (playerWins > compWins) {
+        alert("You won! " + compWins + " winning rounds vs your " + playerWins + " winning rounds.");
+    } else {
+        alert("It's a draw.")
+    }
+}
 
-// play a round
-console.log(computerSelection, playerSelection)
-alert(playRound(computerSelection, playerSelection.toLowerCase()));
+game();
