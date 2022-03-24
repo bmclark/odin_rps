@@ -23,9 +23,9 @@ function playRound () {
     // get computer selection
     let computer = computerPlay();
 
-    // get player selection
+    // get player selection 
     let player = prompt("Please choose rock, paper, or scissors: ");
-    player = player.toLowerCase();
+    player = player.toLowerCase(); //need to add function for input validation
 
     //compare computer/player selections and determine winner
     let compWins = computer + " beats " + player + ", Computer wins.";
@@ -54,7 +54,7 @@ function playRound () {
 function game () {
     let compWins = 0;
     let playerWins = 0;
-    
+
     // call playRound function 5 times
     for (let i = 0; i < 5; i++) {
         let result = playRound();
