@@ -19,13 +19,9 @@ function rand123 () {
     return (Math.floor((Math.random() +1 ) * 10000000) % 3);
 }
 
-function playRound () {
+function playRound (player) {
     // get computer selection
-    let computer = computerPlay();
-
-    // get player selection 
-    let player = prompt("Please choose rock, paper, or scissors: ");
-    player = player.toLowerCase(); //need to add function for input validation
+    let computer = computerPlay()
 
     //compare computer/player selections and determine winner
     let compWins = computer + " beats " + player + ", Computer wins.";
@@ -76,4 +72,10 @@ function game () {
     }
 }
 
-game();
+
+// add click event to each selection box and then send selection to playRound()
+document.querySelectorAll('.selectionBox').forEach(item => {
+    item.addEventListener('click', event => {
+        playRound(event.target.id);
+    });
+});
