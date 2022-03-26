@@ -16,7 +16,6 @@ body {
   background-color: lightgray;
   display: flex;
   justify-content: space-evenly;
-  flex: 1;
   padding: 5% 10%;
 }
 
@@ -28,6 +27,14 @@ body {
   height: 100px;
   width: 100px;
   border: 5px solid black;
+}
+
+.results {
+  background-color: darkgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
 }
 
 #footer {

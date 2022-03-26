@@ -21,27 +21,29 @@ function rand123 () {
 
 function playRound (player) {
     // get computer selection
-    let computer = computerPlay()
+    const computer = computerPlay()
 
     //compare computer/player selections and determine winner
-    let compWins = computer + " beats " + player + ", Computer wins.";
-    let playerWins = player + " beats " + computer + ", You win!";
+    // let results = document.getElementById("results").textContent;
+    const compWins = computer + " beats " + player + ", Computer wins.";
+    const playerWins = player + " beats " + computer + ", You win!";
+    const draw = computer + " equals " + player + ", it's a draw.";
     
     // determine outcome
     if (computer === player) {
-        alert(computer + " equals " + player + ", it's a draw.");
+        document.getElementById("roundResults").textContent = draw;
         return 'draw';
     } else if (computer === 'rock' && player === 'scissors') {
-        alert(compWins);
+        document.getElementById("roundResults").textContent = compWins;
         return 'computer';
     } else if (computer === 'paper' && player === 'rock') {
-        alert(compWins);
+        document.getElementById("roundResults").textContent = compWins;
         return 'computer';
     } else if (computer === 'scissors' && player === 'paper') {
-        alert(compWins);
+        document.getElementById("roundResults").textContent = compWins;
         return 'computer';
     } else {
-        alert(playerWins);
+        document.getElementById("roundResults").textContent = playerWins;
         return 'player';
     }
 }
