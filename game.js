@@ -14,17 +14,21 @@ function computerPlay () {
     }
 }
 
+function playerSelection() {
+    document.querySelectorAll('.selectionBox').forEach(item => {
+        item.addEventListener('click', event => {
+            game(event.target.id);
+        });
+    });
+}
+
 function rand123 () {
     // make a random selection between 0-2
     return (Math.floor((Math.random() +1 ) * 10000000) % 3);
 }
 
-function playRound (player) {
-    // get computer selection
-    const computer = computerPlay()
-
+function determineWinner(computer, player) {
     //compare computer/player selections and determine winner
-    // let results = document.getElementById("results").textContent;
     const compWins = computer + " beats " + player + ", Computer wins.";
     const playerWins = player + " beats " + computer + ", You win!";
     const draw = computer + " equals " + player + ", it's a draw.";
@@ -48,36 +52,41 @@ function playRound (player) {
     }
 }
 
-// play 5 rounds and determine winner
-function game () {
-    let compWins = 0;
-    let playerWins = 0;
+function playRound (player) {
+    // get computer selection
+    const computer = computerPlay()
+    const result = determineWinner(computer, player);
 
-    // call playRound function 5 times
-    for (let i = 0; i < 5; i++) {
-        let result = playRound();
-
-        if (result === 'computer') {
-            compWins++;
-        } else if (result === 'player') {
-            playerWins++;
-        }
-        console.log(compWins, playerWins);
-    }
-
-    if (compWins > playerWins) {
-        alert("Computer wins! " + compWins + " winning rounds vs your " + playerWins + " winning rounds.");
-    } else if (playerWins > compWins) {
-        alert("You won! " + compWins + " winning rounds vs your " + playerWins + " winning rounds.");
-    } else {
-        alert("It's a draw.")
+    if (result === 'computer') {
+        compWins++;
+    } else if (result === 'player') {
+        playerWins++;
     }
 }
 
+// play 5 rounds and determine winner
+function game (player) {
+    playRound(player);
 
-// add click event to each selection box and then send selection to playRound()
-document.querySelectorAll('.selectionBox').forEach(item => {
-    item.addEventListener('click', event => {
-        playRound(event.target.id);
-    });
-});
+    document.getElementById("score").textContent = `Computer: ${compWins}\nPlayer: ${playerWins}`;
+
+    if (compWins === 5) {
+         alert("Computer wins! " + compWins + " winning rounds vs your " + playerWins + " winning rounds.");
+         restart();
+    } else if (playerWins === 5) {
+         alert("You won! " + compWins + " winning rounds vs your " + playerWins + " winning rounds.");
+         restart();
+    }
+}
+
+function restart () {
+    compWins = 0;
+    playerWins = 0;
+    document.getElementById("score").textContent = `Computer: ${compWins}\nPlayer: ${playerWins}`;
+    document.getElementById("roundResults").textContent = '';
+}
+
+let compWins = 0;
+let playerWins = 0;
+document.getElementById("score").textContent = `Computer: ${compWins}\nPlayer: ${playerWins}`;
+playerSelection();
